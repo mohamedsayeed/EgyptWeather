@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF6D00</color>
     <color name="splashBG">#F5F5F5</color>
     <color name="cardBG">#FFF</color>
+    <color name="textDark">#1F384D</color>
+    <color name="textLight">#9999A5</color>
 
 </resources>

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.ibs.egyptweather.api.ConnectionManager;
 import com.ibs.egyptweather.model.Demo;
@@ -17,12 +16,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
     ArrayList<Demo> Cities = new ArrayList<>();
     RecyclerView CitiesList;
-    citiesAdapter Adapter;
-
-
-    static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
+    CitiesAdapter Adapter;
     ArrayList<String> names = new ArrayList<>();
 
     @Override
@@ -52,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Demo> call, Throwable t) {
-                    Toast.makeText(MainActivity.this, "Oppppsss", Toast.LENGTH_SHORT).show();
-
                 }
             });
         }
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager LayoutManager = new LinearLayoutManager(this);
         CitiesList.setLayoutManager(LayoutManager);
         System.out.println("city size ======== " + Cities.size());
-        Adapter = new citiesAdapter(getApplicationContext(), Cities);
+        Adapter = new CitiesAdapter(getApplicationContext(), Cities);
         CitiesList.setAdapter(Adapter);
     }
 

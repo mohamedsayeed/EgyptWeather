@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Card_RestaurantCard"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_margin="10dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
     card_view:cardBackgroundColor="@color/cardBG"
@@ -12,109 +12,142 @@
     card_view:cardElevation="5dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:id="@+id/L_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/city"
-                style="?android:attr/textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                tools:text="Cairo"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                tools:text="Cairo" />
 
             <TextView
-                android:id="@+id/country"
-                style="?android:attr/textAppearanceMedium"
+                android:id="@+id/temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="EG" />
-        </LinearLayout>
+                android:layout_below="@id/city"
+                android:textColor="@color/textDark"
+                android:textSize="32sp"
+                tools:text="25" />
 
-        <ImageView
-            android:id="@+id/condIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/L_city" />
+            <TextView
+                android:id="@+id/celsius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/city"
+                android:layout_toEndOf="@id/temp"
+                android:text="@string/Celsius"
+                android:textColor="@color/textDark"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/condDescr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/condIcon"
-            android:layout_below="@id/condIcon" />
 
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/condDescr"
-            android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/condDescr" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/pressLab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/condDescr"
-            android:layout_marginTop="15dp"
-            android:text="Pressure" />
+            <TextView
+                android:id="@+id/humLab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Humidity"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
 
-        <TextView
-            android:id="@+id/press"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/pressLab"
-            android:layout_toRightOf="@id/pressLab" />
+            <TextView
+                android:id="@+id/hum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/humLab"
+                android:layout_toEndOf="@id/humLab"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium"
+                tools:text="83" />
 
-        <TextView
-            android:id="@+id/humLab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/pressLab"
-            android:text="Humidity" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/humLab"
+                android:layout_toEndOf="@id/hum"
+                android:text="@string/percentage"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
 
-        <TextView
-            android:id="@+id/hum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/humLab"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/humLab" />
+            <TextView
+                android:id="@+id/windLab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/humLab"
+                android:layout_marginTop="15dp"
+                android:text="@string/Wind"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
 
-        <TextView
-            android:id="@+id/windLab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/humLab"
-            android:text="Wind" />
+            <TextView
+                android:id="@+id/windSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/windLab"
+                android:layout_toEndOf="@id/windLab"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium"
+                tools:text="9" />
 
-        <TextView
-            android:id="@+id/windSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/windLab"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/windLab" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/windLab"
+                android:layout_toEndOf="@id/windSpeed"
+                android:text="@string/speedMeasurement"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
 
-        <TextView
-            android:id="@+id/windDeg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/windLab"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@id/windSpeed" />
+            <TextView
+                android:id="@+id/windDegLab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/windLab"
+                android:layout_marginTop="15dp"
+                android:text="@string/Wind_Direction"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
+
+            <TextView
+                android:id="@+id/windDeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/windDegLab"
+                android:layout_below="@id/windLab"
+                android:layout_toEndOf="@id/windDegLab"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium"
+                tools:text="340" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/windDegLab"
+                android:layout_below="@id/windLab"
+                android:layout_toEndOf="@id/windDeg"
+                android:text="@string/degree"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/textMedium" />
+        </RelativeLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

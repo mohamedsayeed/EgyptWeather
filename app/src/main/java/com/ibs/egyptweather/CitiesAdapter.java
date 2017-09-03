@@ -12,37 +12,22 @@ import com.ibs.egyptweather.model.Demo;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Mohamed Sayed on 9/2/2017.
  */
 
-public class citiesAdapter extends RecyclerView.Adapter<citiesAdapter.ViewHolder> {
+class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
 
     Context mContext;
     ArrayList<Demo> mCitiesWeather;
 
 
-    public citiesAdapter(Context context, ArrayList<Demo> citiesWeather) {
+    public CitiesAdapter(Context context, ArrayList<Demo> citiesWeather) {
         mContext = context;
         mCitiesWeather = citiesWeather;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-
-
-        TextView cityName, country, temp, hum, press, windSpeed, windDeg;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            cityName = (TextView) itemView.findViewById(R.id.city);
-            country = (TextView) itemView.findViewById(R.id.country);
-            temp = (TextView) itemView.findViewById(R.id.temp);
-            hum = (TextView) itemView.findViewById(R.id.hum);
-            press = (TextView) itemView.findViewById(R.id.press);
-            windSpeed = (TextView) itemView.findViewById(R.id.windSpeed);
-            windDeg = (TextView) itemView.findViewById(R.id.windDeg);
-
-        }
     }
 
     @Override
@@ -55,10 +40,8 @@ public class citiesAdapter extends RecyclerView.Adapter<citiesAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Demo currentCity = mCitiesWeather.get(position);
         holder.cityName.setText(currentCity.getName());
-        holder.country.setText(currentCity.getSys().getCountry());
         holder.temp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp() - 273.15));
         holder.hum.setText(String.valueOf(currentCity.getMain().getHumidity()));
-        holder.press.setText(String.valueOf(currentCity.getMain().getPressure()));
         holder.windSpeed.setText(String.valueOf(currentCity.getWind().getSpeed()));
         holder.windDeg.setText(String.valueOf(currentCity.getWind().getDeg()));
     }
@@ -66,6 +49,26 @@ public class citiesAdapter extends RecyclerView.Adapter<citiesAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return mCitiesWeather.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+
+        @BindView(R.id.city)
+        public TextView cityName;
+        @BindView(R.id.temp)
+        TextView temp;
+        @BindView(R.id.hum)
+        TextView hum;
+        @BindView(R.id.windSpeed)
+        TextView windSpeed;
+        @BindView(R.id.windDeg)
+        TextView windDeg;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 
 
