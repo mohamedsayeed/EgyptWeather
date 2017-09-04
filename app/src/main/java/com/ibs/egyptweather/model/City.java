@@ -13,7 +13,7 @@ public class City implements Serializable {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<Demo> list = null;
+    private java.util.List<com.ibs.egyptweather.model.List> list = null;
 
     public Integer getCnt() {
         return cnt;
@@ -23,11 +23,11 @@ public class City implements Serializable {
         this.cnt = cnt;
     }
 
-    public java.util.List<Demo> getList() {
+    public java.util.List<com.ibs.egyptweather.model.List> getList() {
         return list;
     }
 
-    public void setList(java.util.List<Demo> list) {
+    public void setList(java.util.List<com.ibs.egyptweather.model.List> list) {
         this.list = list;
     }
 

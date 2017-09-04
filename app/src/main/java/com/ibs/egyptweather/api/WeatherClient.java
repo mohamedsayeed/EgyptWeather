@@ -14,5 +14,5 @@ public interface WeatherClient {
 
     @GET("group?")
     Call<City> weatherForCities(@Query("id") String cityIds, @Query("units") String Units, @Query("APPID") String Key);
-//    Call<Demo> weatherForCities(@Query(QUERY) String cityName, @Query(KEY) String Key);
+//    Call<List> weatherForCities(@Query(QUERY) String cityName, @Query(KEY) String Key);
 }

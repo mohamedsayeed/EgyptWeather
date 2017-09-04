@@ -11,10 +11,9 @@ import android.widget.Toast;
 
 import com.ibs.egyptweather.api.ConnectionManager;
 import com.ibs.egyptweather.model.City;
-import com.ibs.egyptweather.model.Demo;
+import com.ibs.egyptweather.model.List;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +23,7 @@ import static com.ibs.egyptweather.MainActivity.cityIds;
 
 public class CitiesFragment extends Fragment {
 
-    List<Demo> Cities = new ArrayList<>();
+    java.util.List<List> Cities = new ArrayList<>();
     RecyclerView CitiesList;
     CitiesAdapter Adapter;
 

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Demo implements Serializable {
+public class List implements Serializable {
 
     @SerializedName("coord")
     @Expose

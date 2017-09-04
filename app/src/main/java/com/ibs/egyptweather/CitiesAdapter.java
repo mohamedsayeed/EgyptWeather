@@ -7,9 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ibs.egyptweather.model.Demo;
+import com.ibs.egyptweather.model.List;
 
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -22,10 +21,10 @@ import butterknife.ButterKnife;
 class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
 
     Context mContext;
-    List<Demo> mCitiesWeather;
+    java.util.List<List> mCitiesWeather;
 
 
-    public CitiesAdapter(Context context, List<Demo> citiesWeather) {
+    public CitiesAdapter(Context context, java.util.List<List> citiesWeather) {
         mContext = context;
         mCitiesWeather = citiesWeather;
     }
@@ -38,7 +37,7 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Demo currentCity = mCitiesWeather.get(position);
+        List currentCity = mCitiesWeather.get(position);
         holder.cityName.setText(currentCity.getName());
         holder.temp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp() - 273.15));
         holder.hum.setText(String.valueOf(currentCity.getMain().getHumidity()));

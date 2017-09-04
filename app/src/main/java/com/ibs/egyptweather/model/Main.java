@@ -13,7 +13,7 @@ public class Main implements Serializable {
     private Double temp;
     @SerializedName("pressure")
     @Expose
-    private Integer pressure;
+    private Double pressure;
     @SerializedName("humidity")
     @Expose
     private Integer humidity;
@@ -23,6 +23,12 @@ public class Main implements Serializable {
     @SerializedName("temp_max")
     @Expose
     private Double tempMax;
+    @SerializedName("sea_level")
+    @Expose
+    private Double seaLevel;
+    @SerializedName("grnd_level")
+    @Expose
+    private Double grndLevel;
 
     public Double getTemp() {
         return temp;
@@ -32,11 +38,11 @@ public class Main implements Serializable {
         this.temp = temp;
     }
 
-    public Integer getPressure() {
+    public Double getPressure() {
         return pressure;
     }
 
-    public void setPressure(Integer pressure) {
+    public void setPressure(Double pressure) {
         this.pressure = pressure;
     }
 
@@ -62,6 +68,22 @@ public class Main implements Serializable {
 
     public void setTempMax(Double tempMax) {
         this.tempMax = tempMax;
+    }
+
+    public Double getSeaLevel() {
+        return seaLevel;
+    }
+
+    public void setSeaLevel(Double seaLevel) {
+        this.seaLevel = seaLevel;
+    }
+
+    public Double getGrndLevel() {
+        return grndLevel;
+    }
+
+    public void setGrndLevel(Double grndLevel) {
+        this.grndLevel = grndLevel;
     }
 
 }

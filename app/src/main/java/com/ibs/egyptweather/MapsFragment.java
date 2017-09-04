@@ -23,10 +23,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ibs.egyptweather.api.ConnectionManager;
 import com.ibs.egyptweather.model.City;
-import com.ibs.egyptweather.model.Demo;
+import com.ibs.egyptweather.model.List;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -43,7 +42,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 
     static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
-    List<Demo> Cities = new ArrayList<>();
+    java.util.List<List> Cities = new ArrayList<>();
 
 
     @Override
@@ -58,6 +57,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_maps, container, false);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+        getAPIData(cityIds);
+        mapFragment.getMapAsync(this);
+        return rootView;
+    }
 
     /**
      * Manipulates the map once available.
@@ -88,7 +99,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private void addLatLngs() {
         View marker = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker, null);
         TextView numTxt = (TextView) marker.findViewById(R.id.num_txt);
-        for (Demo city : Cities) {
+        for (List city : Cities) {
             LatLng point = new LatLng(city.getCoord().getLat(), city.getCoord().getLon());
             options.position(point);
             options.title(city.getName());
@@ -102,6 +113,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    // Convert a view to bitmap
+
     private void getAPIData(String cityIds) {
         ConnectionManager.getInstance().getCityWeather(cityIds).enqueue(new Callback<City>() {
             @Override
@@ -117,22 +130,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
     }
-
-    private void getAPIData(String cityIds) {
-        ConnectionManager.getInstance().getCityWeather(cityIds).enqueue(new Callback<City>() {
-            @Override
-            public void onResponse(Call<City> call, Response<City> response) {
-                Cities = response.body().getList();
-                System.out.println("Cities Size === " + Cities.size());
-                addLatLngs();
-            }
-
-            @Override
-            public void onFailure(Call<City> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }    // Convert a view to bitmap
 
     public static Bitmap createDrawableFromView(Context context, View view) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
