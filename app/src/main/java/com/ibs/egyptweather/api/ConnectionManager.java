@@ -6,7 +6,7 @@ package com.ibs.egyptweather.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ibs.egyptweather.model.Demo;
+import com.ibs.egyptweather.model.City;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,20 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConnectionManager {
 
-    private WeatherClient weatherClient;
-
-    String BASE_URL = "http://api.openweathermap.org/data/2.5/";
-
-
-
+    static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
     private static ConnectionManager connectionManager;
-
-    public static ConnectionManager getInstance() {
-        if (connectionManager == null)
-            connectionManager = new ConnectionManager();
-
-        return connectionManager;
-    }
+    String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+    private WeatherClient weatherClient;
 
     private ConnectionManager() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -59,8 +49,15 @@ public class ConnectionManager {
 
     }
 
-    public Call<Demo> getCityWeather(String cityName, String API_KEY) {
-        return weatherClient.weatherForCities(cityName,API_KEY);
+    public static ConnectionManager getInstance() {
+        if (connectionManager == null)
+            connectionManager = new ConnectionManager();
+
+        return connectionManager;
+    }
+
+    public Call<City> getCityWeather(String cityIds) {
+        return weatherClient.weatherForCities(cityIds, "metric", API_KEY);
     }
 
 

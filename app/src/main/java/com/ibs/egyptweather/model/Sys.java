@@ -4,7 +4,9 @@ package com.ibs.egyptweather.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Sys {
+import java.io.Serializable;
+
+public class Sys implements Serializable {
 
     @SerializedName("type")
     @Expose

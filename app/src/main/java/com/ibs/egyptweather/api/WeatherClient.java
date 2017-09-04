@@ -1,6 +1,6 @@
 package com.ibs.egyptweather.api;
 
-import com.ibs.egyptweather.model.Demo;
+import com.ibs.egyptweather.model.City;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface WeatherClient {
 
-    @GET("weather?")
-    Call<Demo> weatherForCities(@Query("q") String cityName,@Query("APPID") String Key);
+    @GET("group?")
+    Call<City> weatherForCities(@Query("id") String cityIds, @Query("units") String Units, @Query("APPID") String Key);
 //    Call<Demo> weatherForCities(@Query(QUERY) String cityName, @Query(KEY) String Key);
 }

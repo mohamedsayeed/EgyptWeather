@@ -1,18 +1,15 @@
 package com.ibs.egyptweather;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ibs.egyptweather.model.Demo;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -25,10 +22,10 @@ import butterknife.ButterKnife;
 class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
 
     Context mContext;
-    ArrayList<Demo> mCitiesWeather;
+    List<Demo> mCitiesWeather;
 
 
-    public CitiesAdapter(Context context, ArrayList<Demo> citiesWeather) {
+    public CitiesAdapter(Context context, List<Demo> citiesWeather) {
         mContext = context;
         mCitiesWeather = citiesWeather;
     }
@@ -54,21 +51,21 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
         return mCitiesWeather.size();
     }
 
-    private void displayPopupWindow(View anchorView) {
-        PopupWindow popup = new PopupWindow(mContext);
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View layout = inflater.inflate(R.layout.popup_content, null);
-        popup.setContentView(layout);
-        // Set content width and height
-        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-        // Closes the popup window when touch outside of it - when looses focus
-        popup.setOutsideTouchable(true);
-        popup.setFocusable(true);
-        // Show anchored to button
-        popup.setBackgroundDrawable(new BitmapDrawable());
-        popup.showAsDropDown(anchorView);
-    }
+//    private void displayPopupWindow(View anchorView) {
+//        PopupWindow popup = new PopupWindow(mContext);
+//        LayoutInflater inflater = LayoutInflater.from(mContext);
+//        View layout = inflater.inflate(R.layout.popup_content, null);
+//        popup.setContentView(layout);
+//        // Set content width and height
+//        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+//        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+//        // Closes the popup window when touch outside of it - when looses focus
+//        popup.setOutsideTouchable(true);
+//        popup.setFocusable(true);
+//        // Show anchored to button
+//        popup.setBackgroundDrawable(new BitmapDrawable());
+//        popup.showAsDropDown(anchorView);
+//    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -88,13 +85,13 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    displayPopupWindow(v);
-
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    displayPopupWindow(v);
+//
+//                }
+//            });
         }
     }
 

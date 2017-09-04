@@ -7,22 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ibs.egyptweather.api.ConnectionManager;
+import com.ibs.egyptweather.model.City;
 import com.ibs.egyptweather.model.Demo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.ibs.egyptweather.MainActivity.names;
+import static com.ibs.egyptweather.MainActivity.cityIds;
 
 public class CitiesFragment extends Fragment {
 
-    static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
-    ArrayList<Demo> Cities = new ArrayList<>();
+    List<Demo> Cities = new ArrayList<>();
     RecyclerView CitiesList;
     CitiesAdapter Adapter;
 
@@ -33,28 +35,26 @@ public class CitiesFragment extends Fragment {
 
         CitiesList = (RecyclerView) rootView.findViewById(R.id.Rv_cities);
 
-        getAPIData(names, API_KEY);
+        getAPIData(cityIds);
 
         return rootView;
     }
 
 
-    private void getAPIData(ArrayList<String> names, String APPId) {
-        for (String CityName : names) {
-            ConnectionManager.getInstance().getCityWeather(CityName, APPId).enqueue(new Callback<Demo>() {
-                @Override
-                public void onResponse(Call<Demo> call, Response<Demo> response) {
-                    Demo CityWeather = response.body();
-                    Cities.add(CityWeather);
-                    System.out.println("Cities size ======== " + Cities.size());
-                    initViews();
-                }
+    private void getAPIData(String cityIds) {
+        ConnectionManager.getInstance().getCityWeather(cityIds).enqueue(new Callback<City>() {
+            @Override
+            public void onResponse(Call<City> call, Response<City> response) {
+                Cities = response.body().getList();
+                System.out.println("Cities Size === " + Cities.size());
+                initViews();
+            }
 
-                @Override
-                public void onFailure(Call<Demo> call, Throwable t) {
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<City> call, Throwable t) {
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initViews() {
