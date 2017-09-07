@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -28,17 +31,18 @@ import com.ibs.cityweather.model.Demo;
 import java.util.Hashtable;
 import java.util.Locale;
 
+import static com.ibs.cityweather.R.id.map;
 import static com.ibs.cityweather.SplashScreen.Cities;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
+    View rootView;
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
     private Marker marker;
     private Hashtable<String, String> markers;
-
 
     // Convert a view to bitmap
     public static Bitmap createDrawableFromView(Context context, View view) {
@@ -59,10 +63,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_maps, container, false);
+        rootView = inflater.inflate(R.layout.activity_maps, container, false);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
 
         return rootView;
@@ -81,6 +85,27 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Projection projection = mMap.getProjection();
+                LatLng markerPosition = marker.getPosition();
+                Point markerPoint = projection.toScreenLocation(markerPosition);
+                Point targetPoint = new Point(markerPoint.x, markerPoint.y - rootView.getHeight() / 2);
+                LatLng targetPosition = projection.fromScreenLocation(targetPoint);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(targetPosition), 1000, null);
+                marker.showInfoWindow();
+                return true;
+            }
+        });
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.hideInfoWindow();
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()), 1000, null);
+            }
+        });
+
         addLatLngs();
     }
 
@@ -146,7 +171,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             minTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMin() - 273.15));
             Pressure.setText((String.valueOf(currentCity.getMain().getPressure())));
 
-            closePopUp.setVisibility(View.GONE);
+            closePopUp.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    marker.hideInfoWindow();
+                    return true;
+                }
+            });
+//            closePopUp.setVisibility(View.GONE);
             return view;
         }
     }
