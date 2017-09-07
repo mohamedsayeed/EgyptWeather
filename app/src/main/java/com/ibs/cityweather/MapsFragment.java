@@ -28,7 +28,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ibs.cityweather.model.Demo;
 
-import java.util.Hashtable;
 import java.util.Locale;
 
 import static com.ibs.cityweather.R.id.map;
@@ -37,12 +36,10 @@ import static com.ibs.cityweather.SplashScreen.Cities;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
-    static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
     View rootView;
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
     private Marker marker;
-    private Hashtable<String, String> markers;
 
     // Convert a view to bitmap
     public static Bitmap createDrawableFromView(Context context, View view) {
@@ -178,7 +175,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     return true;
                 }
             });
-//            closePopUp.setVisibility(View.GONE);
             return view;
         }
     }
