@@ -10,21 +10,25 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ibs.cityweather.model.Demo;
 
+import java.util.Hashtable;
 import java.util.Locale;
 
-import static com.ibs.cityweather.MainActivity.Cities;
+import static com.ibs.cityweather.SplashScreen.Cities;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
@@ -32,6 +36,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     static final String API_KEY = "44ee1a8f1bfa0d60fadfd3ad61a6f781";
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
+    private Marker marker;
+    private Hashtable<String, String> markers;
+
 
     // Convert a view to bitmap
     public static Bitmap createDrawableFromView(Context context, View view) {
@@ -57,6 +64,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         return rootView;
     }
 
@@ -72,6 +80,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
         addLatLngs();
     }
 
@@ -89,6 +98,57 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         LatLng camera = new LatLng(Cities.get(0).getCoord().getLat(), Cities.get(0).getCoord().getLon());
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(camera, 5.5f));
 
+    }
+
+    private class CustomInfoWindowAdapter implements InfoWindowAdapter {
+
+        private View view;
+
+        public CustomInfoWindowAdapter() {
+            view = getActivity().getLayoutInflater().inflate(R.layout.custom_info_window,
+                    null);
+        }
+
+        @Override
+        public View getInfoContents(Marker innerMarker) {
+
+            if (marker != null && marker.isInfoWindowShown()) {
+                marker.hideInfoWindow();
+                marker.showInfoWindow();
+            }
+            return null;
+        }
+
+        @Override
+        public View getInfoWindow(final Marker windowMarker) {
+            marker = windowMarker;
+            Demo currentCity = Cities.get(0);
+
+            final TextView cityTitle, cityTemp, weatherDescription, maxTemp, minTemp, cityHum, Pressure, windSpeed, windDeg;
+            ImageView closePopUp = (ImageView) view.findViewById(R.id.close_popup);
+            cityTitle = (TextView) view.findViewById(R.id.cityTitle);
+            cityTemp = (TextView) view.findViewById(R.id.cityTemp);
+            weatherDescription = (TextView) view.findViewById(R.id.description);
+            maxTemp = (TextView) view.findViewById(R.id.maxTemp);
+            minTemp = (TextView) view.findViewById(R.id.minTemp);
+            cityHum = (TextView) view.findViewById(R.id.cityHum);
+            Pressure = (TextView) view.findViewById(R.id.pressure);
+            windSpeed = (TextView) view.findViewById(R.id.wind_speed);
+            windDeg = (TextView) view.findViewById(R.id.wind_deg);
+
+            cityTitle.setText(currentCity.getName());
+            cityTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp() - 273.15));
+            cityHum.setText(String.valueOf(currentCity.getMain().getHumidity()));
+            windSpeed.setText(String.valueOf(currentCity.getWind().getSpeed()));
+            windDeg.setText(String.valueOf(currentCity.getWind().getDeg()));
+            weatherDescription.setText(currentCity.getWeather().get(0).getDescription());
+            maxTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMax() - 273.15));
+            minTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMin() - 273.15));
+            Pressure.setText((String.valueOf(currentCity.getMain().getPressure())));
+
+            closePopUp.setVisibility(View.GONE);
+            return view;
+        }
     }
 
 }

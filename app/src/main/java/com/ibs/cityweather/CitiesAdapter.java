@@ -66,22 +66,6 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> imple
         return cityFilter;
     }
 
-//    private void displayPopupWindow(View anchorView) {
-//        PopupWindow popup = new PopupWindow(mContext);
-//        LayoutInflater inflater = LayoutInflater.from(mContext);
-//        View layout = inflater.inflate(R.layout.popup_content, null);
-//        popup.setContentView(layout);
-//        // Set content width and height
-//        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-//        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-//        // Closes the popup window when touch outside of it - when looses focus
-//        popup.setOutsideTouchable(true);
-//        popup.setFocusable(true);
-//        // Show anchored to button
-//        popup.setBackgroundDrawable(new BitmapDrawable());
-//        popup.showAsDropDown(anchorView);
-//    }
-
     private static class CityFilter extends Filter {
 
         private final CitiesAdapter adapter;
@@ -131,7 +115,7 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> imple
 
 
         @BindView(R.id.city)
-        public TextView cityName;
+        TextView cityName;
         @BindView(R.id.temp)
         TextView temp;
         @BindView(R.id.hum)
@@ -145,13 +129,14 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> imple
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    displayPopupWindow(v);
-//
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Popup popup = new Popup();
+                    popup.displayPopupWindow(v, getAdapterPosition(), mContext, mCitiesWeather);
+
+                }
+            });
         }
     }
 

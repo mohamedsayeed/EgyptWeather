@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 
-import static com.ibs.cityweather.MainActivity.Cities;
+import static com.ibs.cityweather.SplashScreen.Cities;
 
 public class CitiesFragment extends Fragment {
 

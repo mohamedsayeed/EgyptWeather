@@ -4,9 +4,13 @@
 
     <string name="Celsius">°C</string>
     <string name="degree">°</string>
+    <string name="pressureMeasurement">" "mb</string>
+    <string name="Pressure">Pressure:" "</string>
     <string name="Humidity">Humidity:" "</string>
+    <string name="minTemp">Min. Temperature:" "</string>
+    <string name="maxTemp">Max. Temperature:" "</string>
     <string name="percentage">%</string>
     <string name="Wind">Wind:" "</string>
     <string name="Wind_Direction">Wind Degree: " "</string>
-    <string name="speedMeasurement">" "km/h</string>
+    <string name="speedMeasurement">" "km/h," "</string>
 </resources>
