@@ -1,5 +1,5 @@
 
-package com.ibs.egyptweather.model;
+package com.ibs.cityweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

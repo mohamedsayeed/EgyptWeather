@@ -1,5 +1,5 @@
 
-package com.ibs.egyptweather.model;
+package com.ibs.cityweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +13,7 @@ public class City implements Serializable {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.ibs.egyptweather.model.List> list = null;
+    private java.util.List<Demo> list = null;
 
     public Integer getCnt() {
         return cnt;
@@ -23,11 +23,11 @@ public class City implements Serializable {
         this.cnt = cnt;
     }
 
-    public java.util.List<com.ibs.egyptweather.model.List> getList() {
+    public java.util.List<Demo> getList() {
         return list;
     }
 
-    public void setList(java.util.List<com.ibs.egyptweather.model.List> list) {
+    public void setList(java.util.List<Demo> list) {
         this.list = list;
     }
 

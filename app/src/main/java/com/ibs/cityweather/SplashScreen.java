@@ -1,4 +1,4 @@
-package com.ibs.egyptweather;
+package com.ibs.cityweather;
 
 import android.content.Intent;
 import android.os.Bundle;

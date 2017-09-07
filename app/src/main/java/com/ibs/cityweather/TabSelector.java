@@ -1,4 +1,4 @@
-package com.ibs.egyptweather;
+package com.ibs.cityweather;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

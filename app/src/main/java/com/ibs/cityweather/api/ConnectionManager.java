@@ -1,4 +1,4 @@
-package com.ibs.egyptweather.api;
+package com.ibs.cityweather.api;
 
 /**
  * Created by Mohamed Sayed on 9/2/2017.
@@ -6,7 +6,7 @@ package com.ibs.egyptweather.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ibs.egyptweather.model.City;
+import com.ibs.cityweather.model.Demo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -56,8 +56,8 @@ public class ConnectionManager {
         return connectionManager;
     }
 
-    public Call<City> getCityWeather(String cityIds) {
-        return weatherClient.weatherForCities(cityIds, "metric", API_KEY);
+    public Call<Demo> getCityWeather(String cityName) {
+        return weatherClient.weatherForCities(cityName, API_KEY);
     }
 
 
