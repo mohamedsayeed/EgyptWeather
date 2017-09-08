@@ -114,6 +114,19 @@ public class MapsFragment extends Fragment implements
 
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Projection projection = mMap.getProjection();
+        LatLng markerPosition = marker.getPosition();
+        Point markerPoint = projection.toScreenLocation(markerPosition);
+        Point targetPoint = new Point(markerPoint.x, markerPoint.y - rootView.getHeight() / 2);
+        LatLng targetPosition = projection.fromScreenLocation(targetPoint);
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(targetPosition), 1000, null);
+        marker.showInfoWindow();
+
+        return true;
+    }
+
     private void addLatLngs() {
         View marker = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker, null);
         TextView numTxt = (TextView) marker.findViewById(R.id.num_txt);
@@ -128,18 +141,6 @@ public class MapsFragment extends Fragment implements
 
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        Projection projection = mMap.getProjection();
-        LatLng markerPosition = marker.getPosition();
-        Point markerPoint = projection.toScreenLocation(markerPosition);
-        Point targetPoint = new Point(markerPoint.x, markerPoint.y - rootView.getHeight() / 2);
-        LatLng targetPosition = projection.fromScreenLocation(targetPoint);
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(targetPosition), 1000, null);
-        marker.showInfoWindow();
-
-        return true;
-    }
 
     private class CustomInfoWindowAdapter implements InfoWindowAdapter {
 
