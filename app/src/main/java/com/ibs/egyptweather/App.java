@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.app.Application;
 import android.os.SystemClock;

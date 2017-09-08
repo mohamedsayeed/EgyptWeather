@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import org.junit.Test;
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">City Weather</string>
+    <string name="app_name">Egypt Weather</string>
     <string name="title_activity_maps">Egypt Cities</string>
 
     <string name="Celsius">°C</string>

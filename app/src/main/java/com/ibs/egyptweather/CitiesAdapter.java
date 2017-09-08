@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.ibs.cityweather.model.Demo;
+import com.ibs.egyptweather.model.Demo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +25,13 @@ import butterknife.ButterKnife;
 class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> implements Filterable {
 
     Context mContext;
-    ArrayList<Demo> mCitiesWeather;
+    List<Demo> mCitiesWeather;
     private List<Demo> cityList = null;
     private List<Demo> filteredCityList = null;
     private CityFilter cityFilter;
 
 
-    public CitiesAdapter(Context context, ArrayList<Demo> citiesWeather) {
+    public CitiesAdapter(Context context, List<Demo> citiesWeather) {
         mContext = context;
         mCitiesWeather = citiesWeather;
         cityList = citiesWeather;
@@ -48,7 +48,7 @@ class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> imple
     public void onBindViewHolder(ViewHolder holder, int position) {
         Demo currentCity = mCitiesWeather.get(position);
         holder.cityName.setText(currentCity.getName());
-        holder.temp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp() - 273.15));
+        holder.temp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp()));
         holder.hum.setText(String.valueOf(currentCity.getMain().getHumidity()));
         holder.windSpeed.setText(String.valueOf(currentCity.getWind().getSpeed()));
         holder.windDeg.setText(String.valueOf(currentCity.getWind().getDeg()));

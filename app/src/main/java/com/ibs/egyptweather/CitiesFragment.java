@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 
-import static com.ibs.cityweather.SplashScreen.Cities;
+import static com.ibs.egyptweather.SplashScreen.Cities;
 
 public class CitiesFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

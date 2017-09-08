@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.ibs.cityweather.api;
+package com.ibs.egyptweather.api;
 
 /**
  * Created by Mohamed Sayed on 9/2/2017.
@@ -6,9 +6,7 @@ package com.ibs.cityweather.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ibs.cityweather.model.Demo;
-
-import java.util.concurrent.TimeUnit;
+import com.ibs.egyptweather.model.City;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,9 +26,6 @@ public class ConnectionManager {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .build();
 
@@ -56,8 +51,11 @@ public class ConnectionManager {
         return connectionManager;
     }
 
-    public Call<Demo> getCityWeather(String cityName) {
-        return weatherClient.weatherForCities(cityName, API_KEY);
+    //    public Call<Demo> getCityWeather(String cityIds) {
+//        return weatherClient.weatherForCities(cityIds, API_KEY);
+//    }
+    public Call<City> getCityWeather(String cityIds) {
+        return weatherClient.weatherForCities(cityIds, "metric", API_KEY);
     }
 
 

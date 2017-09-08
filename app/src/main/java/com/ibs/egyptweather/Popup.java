@@ -1,4 +1,4 @@
-package com.ibs.cityweather;
+package com.ibs.egyptweather;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.ibs.cityweather.model.Demo;
+import com.ibs.egyptweather.model.Demo;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class Popup {
 
-    public void displayPopupWindow(View anchorView, int position, Context mContext, ArrayList<Demo> mCitiesWeather) {
+    public void displayPopupWindow(View anchorView, int position, Context mContext, List<Demo> mCitiesWeather) {
         final PopupWindow popup = new PopupWindow(mContext);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View layout = inflater.inflate(R.layout.custom_info_window, null);
@@ -39,13 +39,13 @@ public class Popup {
         windDeg = (TextView) layout.findViewById(R.id.wind_deg);
 
         cityTitle.setText(currentCity.getName());
-        cityTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp() - 273.15));
+        cityTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTemp()));
         cityHum.setText(String.valueOf(currentCity.getMain().getHumidity()));
         windSpeed.setText(String.valueOf(currentCity.getWind().getSpeed()));
         windDeg.setText(String.valueOf(currentCity.getWind().getDeg()));
         weatherDescription.setText(currentCity.getWeather().get(0).getDescription());
-        maxTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMax() - 273.15));
-        minTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMin() - 273.15));
+        maxTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMax()));
+        minTemp.setText(String.format(Locale.ENGLISH, "%.0f", currentCity.getMain().getTempMin()));
         Pressure.setText((String.valueOf(currentCity.getMain().getPressure())));
 
         closePopUp.setOnClickListener(new View.OnClickListener() {
